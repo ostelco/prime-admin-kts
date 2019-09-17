@@ -3,15 +3,11 @@ package org.ostelco.tools.prime.admin
 import org.ostelco.prime.dsl.DSL.job
 import org.ostelco.prime.model.PaymentProperties.LABEL
 import org.ostelco.prime.model.PaymentProperties.TAX_REGION_ID
-import org.ostelco.prime.model.PaymentProperties.TYPE
-import org.ostelco.prime.model.PaymentType.SUBSCRIPTION
 import org.ostelco.prime.model.Price
 import org.ostelco.prime.model.Product
-import org.ostelco.prime.model.ProductClass.MEMBERSHIP
 import org.ostelco.prime.model.ProductClass.SIMPLE_DATA
 import org.ostelco.prime.model.ProductProperties.NO_OF_BYTES
 import org.ostelco.prime.model.ProductProperties.PRODUCT_CLASS
-import org.ostelco.prime.model.ProductProperties.SEGMENT_IDS
 import org.ostelco.prime.model.Region
 
 job {
@@ -138,30 +134,6 @@ job {
     update { Region(id = "sg", name = "Singapore") }
 
     update {
-        Product(
-                sku = "PLAN_1SGD_YEAR",
-                price = Price(amount = 100, currency = "SGD"),
-                properties = mapOf(
-                        PRODUCT_CLASS.s to MEMBERSHIP.name,
-                        SEGMENT_IDS.s to "country-sg"),
-                presentation = mapOf(
-                        "priceLabel" to "$1",
-                        "productLabel" to "Annual subscription plan",
-                        "payeeLabel" to "Red Otter",
-                        "subTotal" to "93",
-                        "taxLabel" to "GST",
-                        "tax" to "7",
-                        "subTotalLabel" to "Sub Total"
-                ),
-                payment = mapOf(
-                        TYPE.s to SUBSCRIPTION.name,
-                        LABEL.s to "Annual subscription plan",
-                        TAX_REGION_ID.s to "sg"
-                )
-        )
-    }
-
-    update {
         Product(sku = "1GB_5SGD",
                 price = Price(500, "SGD"),
                 properties = mapOf(
@@ -187,29 +159,6 @@ job {
     // for US
 
     update { Region(id = "us", name = "United States") }
-
-    update {
-        Product(
-                sku = "PLAN_1USD_YEAR",
-                price = Price(amount = 100, currency = "USD"),
-                properties = mapOf(
-                        PRODUCT_CLASS.s to MEMBERSHIP.name,
-                        SEGMENT_IDS.s to "country-us"),
-                presentation = mapOf(
-                        "priceLabel" to "$1",
-                        "productLabel" to "Annual subscription plan",
-                        "payeeLabel" to "Red Otter",
-                        "subTotal" to "80",
-                        "taxLabel" to "GST",
-                        "tax" to "20",
-                        "subTotalLabel" to "Sub Total"),
-                payment = mapOf(
-                        TYPE.s to SUBSCRIPTION.name,
-                        LABEL.s to "Annual subscription plan",
-                        TAX_REGION_ID.s to "us"
-                )
-        )
-    }
 
     update {
         Product(sku = "1GB_5USD",

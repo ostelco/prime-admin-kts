@@ -152,40 +152,6 @@ readTransaction {
             expected = Region(id = "sg", name = "Singapore"),
             actual = get(Region withCode "sg").getOrElse { null })
 
-    val sgPlan = get(Plan withId "PLAN_1SGD_YEAR").getOrElse { null }
-    assertEquals(
-            expected = Plan(id = "PLAN_1SGD_YEAR",
-                    stripePlanId = sgPlan?.stripePlanId,
-                    stripeProductId = sgPlan?.stripeProductId,
-                    interval = "year"),
-            actual = sgPlan
-    )
-
-    assertEquals(
-            expected = Product(
-                    sku = "PLAN_1SGD_YEAR",
-                    price = Price(amount = 100, currency = "SGD"),
-                    properties = mapOf(
-                            PRODUCT_CLASS.s to MEMBERSHIP.name,
-                            SEGMENT_IDS.s to "country-sg"),
-                    presentation = mapOf(
-                            "priceLabel" to "$1",
-                            "productLabel" to "Annual subscription plan",
-                            "payeeLabel" to "Red Otter",
-                            "subTotal" to "93",
-                            "taxLabel" to "GST",
-                            "tax" to "7",
-                            "subTotalLabel" to "Sub Total"
-                    ),
-                    payment = mapOf(
-                            TYPE.s to SUBSCRIPTION.name,
-                            LABEL.s to "Annual subscription plan",
-                            TAX_REGION_ID.s to "sg"
-                    )
-            ),
-            actual = get(Product withSku  "PLAN_1SGD_YEAR").getOrElse { null }
-    )
-
     assertEquals(
             expected = Product(sku = "1GB_5SGD",
                     price = Price(500, "SGD"),
@@ -215,39 +181,6 @@ readTransaction {
     assertEquals(
             expected = Region(id = "us", name = "United States"),
             actual = get(Region withCode "us").getOrElse { null }
-    )
-
-    val usPlan = get(Plan withId "PLAN_1USD_YEAR").getOrElse { null }
-    assertEquals(
-            expected = Plan(id = "PLAN_1USD_YEAR",
-                    stripePlanId = usPlan?.stripePlanId,
-                    stripeProductId = usPlan?.stripeProductId,
-                    interval = "year"),
-            actual = usPlan
-    )
-
-    assertEquals(
-            expected = Product(
-                    sku = "PLAN_1USD_YEAR",
-                    price = Price(amount = 100, currency = "USD"),
-                    properties = mapOf(
-                            PRODUCT_CLASS.s to MEMBERSHIP.name,
-                            SEGMENT_IDS.s to "country-us"),
-                    presentation = mapOf(
-                            "priceLabel" to "$1",
-                            "productLabel" to "Annual subscription plan",
-                            "payeeLabel" to "Red Otter",
-                            "subTotal" to "80",
-                            "taxLabel" to "GST",
-                            "tax" to "20",
-                            "subTotalLabel" to "Sub Total"),
-                    payment = mapOf(
-                            TYPE.s to SUBSCRIPTION.name,
-                            LABEL.s to "Annual subscription plan",
-                            TAX_REGION_ID.s to "us"
-                    )
-            ),
-            actual = get(Product withSku  "PLAN_1USD_YEAR").getOrElse { null }
     )
 
     assertEquals(

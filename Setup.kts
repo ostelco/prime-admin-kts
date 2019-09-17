@@ -142,46 +142,6 @@ job {
     create { Region(id = "sg", name = "Singapore") }
 }
 
-adminStore.createPlan(
-        plan = Plan(
-                id = "PLAN_1SGD_YEAR",
-                interval = "year"),
-        stripeProductName = "Annual subscription plan",
-        planProduct = Product(
-                sku = "PLAN_1SGD_YEAR",
-                price = Price(amount = 100, currency = "SGD"),
-                properties = mapOf(
-                        PRODUCT_CLASS.s to MEMBERSHIP.name,
-                        SEGMENT_IDS.s to "country-sg"),
-                presentation = mapOf(
-                        "priceLabel" to "$1",
-                        "productLabel" to "Annual subscription plan",
-                        "payeeLabel" to "Red Otter",
-                        "subTotal" to "93",
-                        "taxLabel" to "GST",
-                        "tax" to "7",
-                        "subTotalLabel" to "Sub Total"
-                ),
-                payment = mapOf(
-                        TYPE.s to SUBSCRIPTION.name,
-                        LABEL.s to "Annual subscription plan",
-                        TAX_REGION_ID.s to "sg"
-                )
-        )
-).mapLeft {
-    logger.error(it.message)
-}
-
-adminStore.atomicCreateOffer(
-        offer = Offer(
-                id = "plan-offer-sg",
-                products = listOf("PLAN_1SGD_YEAR")
-        ),
-        segments = listOf(Segment(id = "plan-country-sg"))
-).mapLeft {
-    logger.error(it.message)
-}
-
 adminStore.atomicCreateOffer(
         offer = Offer(id = "default_offer-sg"),
         segments = listOf(Segment(id = "country-sg")),
@@ -215,45 +175,6 @@ adminStore.atomicCreateOffer(
 job {
     create { Region(id = "us", name = "United States") }
 }.mapLeft {
-    logger.error(it.message)
-}
-
-adminStore.createPlan(
-        plan = Plan(
-                id = "PLAN_1USD_YEAR",
-                interval = "year"),
-        stripeProductName = "Annual subscription plan",
-        planProduct = Product(
-                sku = "PLAN_1USD_YEAR",
-                price = Price(amount = 100, currency = "USD"),
-                properties = mapOf(
-                        PRODUCT_CLASS.s to MEMBERSHIP.name,
-                        SEGMENT_IDS.s to "country-us"),
-                presentation = mapOf(
-                        "priceLabel" to "$1",
-                        "productLabel" to "Annual subscription plan",
-                        "payeeLabel" to "Red Otter",
-                        "subTotal" to "80",
-                        "taxLabel" to "GST",
-                        "tax" to "20",
-                        "subTotalLabel" to "Sub Total"),
-                payment = mapOf(
-                        TYPE.s to SUBSCRIPTION.name,
-                        LABEL.s to "Annual subscription plan",
-                        TAX_REGION_ID.s to "us"
-                )
-        )
-).mapLeft {
-    logger.error(it.message)
-}
-
-adminStore.atomicCreateOffer(
-        offer = Offer(
-                id = "plan-offer-us",
-                products = listOf("PLAN_1USD_YEAR")
-        ),
-        segments = listOf(Segment(id = "plan-country-us"))
-).mapLeft {
     logger.error(it.message)
 }
 
