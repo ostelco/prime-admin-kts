@@ -10,6 +10,8 @@ import org.ostelco.prime.model.ProductProperties.NO_OF_BYTES
 import org.ostelco.prime.model.ProductProperties.PRODUCT_CLASS
 import org.ostelco.prime.model.Region
 
+println("Started Syncing")
+
 job {
 
     // for Norway
@@ -156,6 +158,29 @@ job {
         )
     }
 
+    update {
+        Product(sku = "5GB_20SGD",
+                price = Price(2000, "SGD"),
+                properties = mapOf(
+                        PRODUCT_CLASS.s to SIMPLE_DATA.name,
+                        NO_OF_BYTES.s to "5_368_709_120"
+                ),
+                presentation = mapOf(
+                        "priceLabel" to "$20",
+                        "productLabel" to "5GB",
+                        "payeeLabel" to "Red Otter",
+                        "subTotal" to "1868",
+                        "taxLabel" to "GST",
+                        "tax" to "132",
+                        "subTotalLabel" to "Sub Total"
+                ),
+                payment = mapOf(
+                        LABEL.s to "5GB",
+                        TAX_REGION_ID.s to "sg"
+                )
+        )
+    }
+
     // for US
 
     update { Region(id = "us", name = "United States") }
@@ -227,3 +252,5 @@ job {
         )
     }
 }
+
+println("Syncing Complete")

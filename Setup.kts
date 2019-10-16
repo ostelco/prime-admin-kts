@@ -5,21 +5,18 @@ import org.ostelco.prime.getLogger
 import org.ostelco.prime.model.Offer
 import org.ostelco.prime.model.PaymentProperties.LABEL
 import org.ostelco.prime.model.PaymentProperties.TAX_REGION_ID
-import org.ostelco.prime.model.PaymentProperties.TYPE
-import org.ostelco.prime.model.PaymentType.SUBSCRIPTION
-import org.ostelco.prime.model.Plan
 import org.ostelco.prime.model.Price
 import org.ostelco.prime.model.Product
-import org.ostelco.prime.model.ProductClass.MEMBERSHIP
 import org.ostelco.prime.model.ProductClass.SIMPLE_DATA
 import org.ostelco.prime.model.ProductProperties.NO_OF_BYTES
 import org.ostelco.prime.model.ProductProperties.PRODUCT_CLASS
-import org.ostelco.prime.model.ProductProperties.SEGMENT_IDS
 import org.ostelco.prime.model.Region
 import org.ostelco.prime.model.Segment
 import org.ostelco.prime.storage.graph.adminStore
 
 private val logger by getLogger()
+
+println("Started Setup")
 
 // for Norway
 
@@ -165,10 +162,35 @@ adminStore.atomicCreateOffer(
                                 LABEL.s to "1GB",
                                 TAX_REGION_ID.s to "sg"
                         )
+                ),
+                Product(sku = "5GB_20SGD",
+                        price = Price(2000, "SGD"),
+                        properties = mapOf(
+                                PRODUCT_CLASS.s to SIMPLE_DATA.name,
+                                NO_OF_BYTES.s to "5_368_709_120"
+                        ),
+                        presentation = mapOf(
+                                "priceLabel" to "$20",
+                                "productLabel" to "5GB",
+                                "payeeLabel" to "Red Otter",
+                                "subTotal" to "1868",
+                                "taxLabel" to "GST",
+                                "tax" to "132",
+                                "subTotalLabel" to "Sub Total"
+                        ),
+                        payment = mapOf(
+                                LABEL.s to "5GB",
+                                TAX_REGION_ID.s to "sg"
+                        )
                 )
         )
 ).mapLeft {
     logger.error(it.message)
+}
+
+// for Malaysia
+job {
+    create { Region(id = "my", name = "Malaysia") }
 }
 
 // for US
@@ -211,20 +233,6 @@ adminStore.atomicCreateOffer(
 
 job {
     create {
-        Product(sku = "2GB_FREE_ON_JOINING",
-                price = Price(0, ""),
-                properties = mapOf(
-                        PRODUCT_CLASS.s to SIMPLE_DATA.name,
-                        NO_OF_BYTES.s to "2_147_483_648"
-                ),
-                presentation = mapOf(
-                        "priceLabel" to "Free",
-                        "productLabel" to "2GB Welcome Pack"
-                )
-        )
-    }
-
-    create {
         Product(sku = "1GB_FREE_ON_JOINING",
                 price = Price(0, ""),
                 properties = mapOf(
@@ -254,3 +262,5 @@ job {
 }.mapLeft {
     logger.error(it.message)
 }
+
+println("Setup Complete")
