@@ -143,7 +143,7 @@ job {
                         NO_OF_BYTES.s to "1_073_741_824"
                 ),
                 presentation = mapOf(
-                        "priceLabel" to "$5",
+                        "priceLabel" to "S$5",
                         "productLabel" to "1GB",
                         "payeeLabel" to "Red Otter",
                         "subTotal" to "467",
@@ -166,7 +166,7 @@ job {
                         NO_OF_BYTES.s to "5_368_709_120"
                 ),
                 presentation = mapOf(
-                        "priceLabel" to "$20",
+                        "priceLabel" to "S$20",
                         "productLabel" to "5GB",
                         "payeeLabel" to "Red Otter",
                         "subTotal" to "1868",
