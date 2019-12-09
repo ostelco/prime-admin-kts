@@ -177,7 +177,6 @@ readTransaction {
                 actual = get(Product withSku  "1GB_5SGD").bind()
         )
 
-
         assertEquals(
                 expected = Product(sku = "5GB_20SGD",
                         price = Price(2000, "SGD"),
@@ -248,6 +247,54 @@ readTransaction {
                         )
                 ),
                 actual = get(Product withSku  "5GB_5SGD").bind()
+        )
+
+        assertEquals(
+                expected = Product(sku = "1GB_4SGD",
+                        price = Price(400, "SGD"),
+                        properties = mapOf(
+                                PRODUCT_CLASS.s to SIMPLE_DATA.name,
+                                NO_OF_BYTES.s to "1_073_741_824"
+                        ),
+                        presentation = mapOf(
+                                "priceLabel" to "S$4",
+                                "productLabel" to "1GB",
+                                "payeeLabel" to "Red Otter",
+                                "subTotal" to "374",
+                                "taxLabel" to "GST",
+                                "tax" to "26",
+                                "subTotalLabel" to "Sub Total"
+                        ),
+                        payment = mapOf(
+                                LABEL.s to "1GB",
+                                TAX_REGION_ID.s to "sg"
+                        )
+                ),
+                actual = get(Product withSku  "1GB_4SGD").bind()
+        )
+
+        assertEquals(
+                expected = Product(sku = "5GB_15SGD",
+                        price = Price(1500, "SGD"),
+                        properties = mapOf(
+                                PRODUCT_CLASS.s to SIMPLE_DATA.name,
+                                NO_OF_BYTES.s to "5_368_709_120"
+                        ),
+                        presentation = mapOf(
+                                "priceLabel" to "S$15",
+                                "productLabel" to "5GB",
+                                "payeeLabel" to "Red Otter",
+                                "subTotal" to "1402",
+                                "taxLabel" to "GST",
+                                "tax" to "98",
+                                "subTotalLabel" to "Sub Total"
+                        ),
+                        payment = mapOf(
+                                LABEL.s to "5GB",
+                                TAX_REGION_ID.s to "sg"
+                        )
+                ),
+                actual = get(Product withSku  "5GB_15SGD").bind()
         )
 
 
